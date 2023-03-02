@@ -13,17 +13,17 @@ app.listen(5100, () => {
     console.log(`Server has started on port: ${PORT}`)
 });
 
-// fs.mkdir(path.join('main'), (err) => {
-//     if (err) throw new Error(err.message);
-// })
+fs.mkdir(path.join('main'), (err) => {
+    if (err) throw new Error(err.message);
+})
 
 // Винести базу даних в json.file, при створенні записувати туда нових юзерів через fs
 // При створенні валідацію на імія і вік, імя повинно бути більше 2 символів, вік – не менше нуля
 // На гет, пут, деліт юзерів перевірити чи такий юзер є
 
-// fs.writeFile(path.join('main', 'db.js'), '', (err) => {
-//     if (err) throw new Error(err.message);
-// })
+fs.writeFile(path.join('main', 'db.js'), '', (err) => {
+    if (err) throw new Error(err.message);
+})
 
 app.get('/users', (req, res) => {
     res.status(200).json(users);
