@@ -48,7 +48,9 @@ typings/
 *.tsbuildinfo
 
 #misc
+.idea/
 .idea
+/.idea
 
 # Optional npm cache directory
 .npm
