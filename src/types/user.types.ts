@@ -12,8 +12,3 @@ export interface IUser {
   email: string;
   password: string;
 }
-
-export interface ICommonRes<T> {
-  message: string;
-  data: T;
-}

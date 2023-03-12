@@ -9,10 +9,26 @@ export const userRouter = router;
 
 router.get("/", userController.getAll);
 
-router.get("/:userID", userMW.getByIdError, userController.getById);
+router.post("/", userMW.isValidCreate, userController.create);
 
-router.post("/", userController.create);
+router.get(
+  "/:userID",
+  userMW.isIDValid,
+  userMW.getByIdError,
+  userController.getById
+);
 
-router.put("/:userID", userController.update);
+router.put(
+  "/:userID",
+  userMW.isIDValid,
+  userMW.isValidUpdate,
+  userMW.getByIdError,
+  userController.update
+);
 
-router.delete("/:userID", userController.delete);
+router.delete(
+  "/:userID",
+  userMW.isIDValid,
+  userMW.getByIdError,
+  userController.delete
+);

@@ -29,7 +29,7 @@ class UserService {
 
   public async update(id: string, body: object) {
     try {
-      return User.updateOne({ _id: id }, body);
+      return User.findByIdAndUpdate({ _id: id }, { ...body }, { new: true });
     } catch (e) {
       throw new ApiError(e.message, e.status);
     }
