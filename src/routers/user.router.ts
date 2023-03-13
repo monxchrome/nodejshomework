@@ -14,7 +14,7 @@ router.post("/", userMW.isValidCreate, userController.create);
 router.get(
   "/:userID",
   userMW.isIDValid,
-  userMW.getByIdError,
+  userMW.getByIdOrThrow,
   userController.getById
 );
 
@@ -22,13 +22,13 @@ router.put(
   "/:userID",
   userMW.isIDValid,
   userMW.isValidUpdate,
-  userMW.getByIdError,
+  userMW.getByIdOrThrow,
   userController.update
 );
 
 router.delete(
   "/:userID",
   userMW.isIDValid,
-  userMW.getByIdError,
+  userMW.getByIdOrThrow,
   userController.delete
 );
