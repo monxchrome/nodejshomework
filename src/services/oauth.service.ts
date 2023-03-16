@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
 
-import { SaltConstants } from "../config/constants/salt.constants";
+import { configs } from "../config";
 
 class PasswordService {
   public async hash(password: string): Promise<string> {
-    return bcrypt.hash(password, +SaltConstants.PASSWORD_SALT);
+    return bcrypt.hash(password, +configs.PASSWORD_SALT);
   }
 
   public async compare(

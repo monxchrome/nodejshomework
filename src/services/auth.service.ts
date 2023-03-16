@@ -1,9 +1,13 @@
+import { EEmailEnum } from "../enums/email.enum";
+import { ESmsEnum } from "../enums/sms.enum";
 import { ApiError } from "../errors";
 import { User } from "../models";
 import { Token } from "../models/Token.model";
-import { ITokenPair, IUser } from "../types";
+import { ITokenPair, ITokenPayload, IUser } from "../types";
 import { ICredentials } from "../types/auth.types";
+import { emailService } from "./email.service";
 import { passwordService } from "./oauth.service";
+import { smsService } from "./sms.service";
 import { tokenService } from "./token.service";
 
 class AuthService {
@@ -16,6 +20,9 @@ class AuthService {
         ...body,
         password: hashedPassword,
       });
+
+      await smsService.sendSms("+38268256871", ESmsEnum.REGISTER);
+      await emailService.sendEmail("inacheat@gmail.com", EEmailEnum.REGISTER); // body.email
     } catch (e) {
       throw new ApiError(e.message, e.status);
     }
@@ -36,7 +43,7 @@ class AuthService {
       }
 
       const tokenPair = tokenService.generateTokenPair({
-        id: user._id,
+        _id: user._id,
         name: user.name,
       });
 
@@ -46,6 +53,27 @@ class AuthService {
         _user_id: user._id,
         ...tokenPair,
       });
+
+      return tokenPair;
+    } catch (e) {
+      throw new ApiError(e.message, e.status);
+    }
+  }
+
+  public async refresh(
+    tokenData: ITokenPair,
+    jwtPayload: ITokenPayload
+  ): Promise<ITokenPair> {
+    try {
+      const tokenPair = tokenService.generateTokenPair({
+        _id: jwtPayload._id,
+        name: jwtPayload.name,
+      });
+
+      await Promise.all([
+        Token.create({ _user_id: jwtPayload._id, ...tokenPair }),
+        Token.deleteOne({ refreshToken: tokenData.refreshToken }),
+      ]);
 
       return tokenPair;
     } catch (e) {

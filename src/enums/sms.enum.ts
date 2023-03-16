@@ -1,0 +1,5 @@
+export enum ESmsEnum {
+  REGISTER,
+  CHANGED_PASSWORD,
+  FORGOT_PASSWORD,
+}

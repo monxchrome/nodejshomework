@@ -150,6 +150,24 @@ class UserMiddleware {
       next(e);
     }
   }
+
+  public async isValidChangePassword(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const { error } = UserValidator.changePassword.validate(req.body);
+
+      if (error) {
+        throw new ApiError(error.message, 409);
+      }
+
+      next();
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export const userMW = new UserMiddleware();

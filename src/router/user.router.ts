@@ -1,7 +1,8 @@
 import { Router } from "express";
 
-import { userController } from "../controllers/user.controller";
-import { userMW } from "../middlewares/user.middleware";
+import { userController } from "../controllers";
+import { userMW } from "../middlewares";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const router = Router();
 
@@ -13,6 +14,7 @@ router.post("/", userMW.isValidCreate, userController.create);
 
 router.get(
   "/:userID",
+  authMiddleware.checkAccessToken,
   userMW.isIDValid,
   userMW.getByIdOrThrow,
   userController.getById
@@ -20,6 +22,7 @@ router.get(
 
 router.put(
   "/:userID",
+  authMiddleware.checkAccessToken,
   userMW.isIDValid,
   userMW.isValidUpdate,
   userMW.getByIdOrThrow,
@@ -28,7 +31,15 @@ router.put(
 
 router.delete(
   "/:userID",
+  authMiddleware.checkAccessToken,
   userMW.isIDValid,
   userMW.getByIdOrThrow,
   userController.delete
+);
+
+router.post(
+  "/password/change",
+  authMiddleware.checkAccessToken,
+  userMW.isValidChangePassword,
+  userController.changePassword
 );

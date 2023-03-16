@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 
-import { EGenders } from "../types";
+import { EGenders } from "../enums";
 
 export const userSchema = new Schema(
   {

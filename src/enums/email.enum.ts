@@ -1,0 +1,5 @@
+export enum EEmailEnum {
+  REGISTER,
+  CHANGED_PASSWORD,
+  FORGOT_PASSWORD,
+}
