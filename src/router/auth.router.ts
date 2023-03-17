@@ -53,3 +53,9 @@ router.post(
   userMW.getDynamicallyOrThrow("email"),
   authController.activateEmail
 );
+
+router.put(
+  "/activate/:token",
+  userMW.getDynamicallyOrThrow("email"),
+  authController.setActivate
+);

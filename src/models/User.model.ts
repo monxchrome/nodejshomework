@@ -1,6 +1,7 @@
 import { model, Schema } from "mongoose";
 
 import { EGenders } from "../enums";
+import { EUserStatus } from "../enums/user-status.enum";
 
 export const userSchema = new Schema(
   {
@@ -31,6 +32,11 @@ export const userSchema = new Schema(
     password: {
       type: String,
       required: [true, "Password is required"],
+    },
+    status: {
+      type: String,
+      enum: EUserStatus,
+      default: EUserStatus.inactive,
     },
   },
   { versionKey: false }

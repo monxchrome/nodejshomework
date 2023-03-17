@@ -1,6 +1,7 @@
 import { EActionToken } from "../enums/action-token.enum";
 import { EEmailEnum } from "../enums/email.enum";
 import { ESmsEnum } from "../enums/sms.enum";
+import { EUserStatus } from "../enums/user-status.enum";
 import { ApiError } from "../errors";
 import { User } from "../models";
 import { Action } from "../models/Action.model";
@@ -137,6 +138,12 @@ class AuthService {
         EActionToken.activate
       );
 
+      await Action.create({
+        actionToken,
+        tokenType: EActionToken.activate,
+        _user_id: user._id,
+      });
+
       await emailService.sendEmail(user.email, EEmailEnum.ACTIVATE_EMAIL, {
         token: actionToken,
       });
@@ -149,6 +156,14 @@ class AuthService {
     try {
       const hashedPassword = await passwordService.hash(password);
       await User.updateOne({ _id: id }, { password: hashedPassword });
+    } catch (e) {
+      throw new ApiError(e.message, e.status);
+    }
+  }
+
+  public async setActivateEmail(id: string): Promise<void> {
+    try {
+      await User.updateOne({ _id: id }, { status: EUserStatus.active });
     } catch (e) {
       throw new ApiError(e.message, e.status);
     }
