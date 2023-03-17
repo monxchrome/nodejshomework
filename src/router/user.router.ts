@@ -36,10 +36,3 @@ router.delete(
   userMW.getByIdOrThrow,
   userController.delete
 );
-
-router.post(
-  "/password/change",
-  authMiddleware.checkAccessToken,
-  userMW.isValidChangePassword,
-  userController.changePassword
-);

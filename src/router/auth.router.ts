@@ -27,3 +27,29 @@ router.post(
   authMiddleware.checkRefreshToken,
   authController.refresh
 );
+
+router.post(
+  "/password/change",
+  authMiddleware.checkAccessToken,
+  authMiddleware.isValidChangePassword,
+  authController.changePassword
+);
+
+router.post(
+  "/password/forgot",
+  userMW.getDynamicallyOrThrow("email"),
+  authController.forgotPassword
+);
+
+router.put(
+  "/password/forgot/:token",
+  authMiddleware.checkActionForgotToken,
+  authMiddleware.isValidForgotPassword,
+  authController.setForgotPassword
+);
+
+router.post(
+  "/activate",
+  userMW.getDynamicallyOrThrow("email"),
+  authController.activateEmail
+);

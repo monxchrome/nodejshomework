@@ -6,9 +6,12 @@ export const configs = {
   PORT: process.env.PORT || 5001,
 
   DB_URL: process.env.DB_URL,
+  FRONT_URL: process.env.FRONT_URL,
 
   ACCESS_SECRET: process.env.JWT_ACCESS_SECRET,
   REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
+  FORGOT_SECRET: process.env.JWT_FORGOT_SECRET,
+  ACTIVATE_SECRET: process.env.JWT_ACTIVATE_SECRET,
 
   PASSWORD_SALT: process.env.PASSWORD_SALT,
 

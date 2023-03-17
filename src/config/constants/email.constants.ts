@@ -15,4 +15,8 @@ export const allTemplates: {
     subject: "Just following steps and all we be good",
     templateName: "forgot.password",
   },
+  [EEmailEnum.ACTIVATE_EMAIL]: {
+    subject: "Just press the button",
+    templateName: "activate.email",
+  },
 };
