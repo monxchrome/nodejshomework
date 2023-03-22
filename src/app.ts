@@ -7,6 +7,7 @@ config();
 import { configs } from "./config";
 import { authRouter } from "./router";
 import { userRouter } from "./router";
+import { adminRouter } from "./router/admin.router";
 import { IError } from "./types";
 
 const app = express();
@@ -14,6 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/admin", adminRouter);
 app.use("/users", userRouter);
 app.use("/auth", authRouter);
 
