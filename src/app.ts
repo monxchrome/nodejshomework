@@ -8,6 +8,7 @@ import { configs } from "./config";
 import { authRouter } from "./router";
 import { userRouter } from "./router";
 import { IError } from "./types";
+import {cronRunner} from "./cron";
 
 const app = express();
 
@@ -28,5 +29,6 @@ app.use((err: IError, req: Request, res: Response, next: NextFunction) => {
 
 app.listen(configs.PORT, async () => {
   await mongoose.connect(configs.DB_URL);
+  cronRunner();
   console.log(`Server has started on port: ${configs.PORT}`);
 });

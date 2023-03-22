@@ -95,7 +95,11 @@ class AuthController {
       const { password } = req.body;
       const { jwtPayload } = req.res.locals;
 
-      await authService.setForgotPassword(password, jwtPayload._id);
+      await authService.setForgotPassword(
+        password,
+        jwtPayload._id,
+        req.params.token
+      );
 
       res.sendStatus(200);
     } catch (e) {

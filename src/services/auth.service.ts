@@ -5,6 +5,7 @@ import { EUserStatus } from "../enums/user-status.enum";
 import { ApiError } from "../errors";
 import { User } from "../models";
 import { Action } from "../models/Action.model";
+import { oldPassword } from "../models/Old.password.model";
 import { Token } from "../models/Token.model";
 import { ITokenPair, ITokenPayload, IUser } from "../types";
 import { ICredentials } from "../types/auth.types";
@@ -126,6 +127,7 @@ class AuthService {
       await emailService.sendEmail(user.email, EEmailEnum.FORGOT_PASSWORD, {
         token: actionToken,
       });
+      await oldPassword.create({ _user_id: user._id, password: user.password });
     } catch (e) {
       throw new ApiError(e.message, e.status);
     }
@@ -152,10 +154,18 @@ class AuthService {
     }
   }
 
-  public async setForgotPassword(password: string, id: string): Promise<void> {
+  public async setForgotPassword(
+    password: string,
+    id: string,
+    token: string
+  ): Promise<void> {
     try {
       const hashedPassword = await passwordService.hash(password);
       await User.updateOne({ _id: id }, { password: hashedPassword });
+      await Action.deleteOne({
+        actionToken: token,
+        tokenType: EActionToken.forgot,
+      });
     } catch (e) {
       throw new ApiError(e.message, e.status);
     }

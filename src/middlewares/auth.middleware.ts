@@ -4,8 +4,9 @@ import { EToken } from "../enums";
 import { EActionToken } from "../enums/action-token.enum";
 import { ApiError } from "../errors";
 import { Action } from "../models/Action.model";
+import { oldPassword } from "../models/Old.password.model";
 import { Token } from "../models/Token.model";
-import { tokenService } from "../services";
+import {passwordService, tokenService} from "../services";
 import { UserValidator } from "../validators";
 
 class AuthMiddleware {
@@ -123,6 +124,41 @@ class AuthMiddleware {
       }
 
       req.res.locals = { tokenData, jwtPayload };
+      next();
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  public async checkOldPassword(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const { body } = req;
+      const { tokenData } = req.res.locals;
+
+      const oldPasswords = await oldPassword.find({
+        _user_id: tokenData._id,
+      });
+
+      if (!oldPasswords) {
+        next();
+      }
+
+      await Promise.all(
+        oldPasswords.map(async (record) => {
+          const isMatched = await passwordService.compare(
+            body.password,
+            record.password
+          );
+          if (isMatched) {
+            throw new ApiError("Your new password is same as old", 409);
+          }
+        })
+      );
+
       next();
     } catch (e) {
       next(e);
