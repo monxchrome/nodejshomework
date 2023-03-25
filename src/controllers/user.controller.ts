@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { userService } from "../services";
 import { ICommonRes } from "../types";
 import { IUser } from "../types";
+import { IQuery } from "../types/pagination.types";
 
 class UserController {
   public async getAll(
@@ -11,7 +12,10 @@ class UserController {
     next: NextFunction
   ): Promise<Response<IUser[]>> {
     try {
-      const users = await userService.getAll();
+      const users = await userService.getPagination(
+        req.query as unknown as IQuery
+      );
+
       return res.json(users);
     } catch (e) {
       next(e);

@@ -25,8 +25,8 @@ class AuthService {
         password: hashedPassword,
       });
 
-      await smsService.sendSms("+38268256871", ESmsEnum.REGISTER);
-      await emailService.sendEmail("inacheat@gmail.com", EEmailEnum.REGISTER); // body.email
+      await smsService.sendSms(body.phone, ESmsEnum.REGISTER);
+      await emailService.sendEmail(body.email, EEmailEnum.REGISTER); // body.email
     } catch (e) {
       throw new ApiError(e.message, e.status);
     }

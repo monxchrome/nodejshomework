@@ -6,7 +6,7 @@ import { ApiError } from "../errors";
 import { Action } from "../models/Action.model";
 import { oldPassword } from "../models/Old.password.model";
 import { Token } from "../models/Token.model";
-import {passwordService, tokenService} from "../services";
+import { passwordService, tokenService } from "../services";
 import { UserValidator } from "../validators";
 
 class AuthMiddleware {
