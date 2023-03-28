@@ -50,7 +50,7 @@ export const userSchema = new Schema(
       default: EUserStatus.inactive,
     },
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: true }
 );
 
 // statics use all model from db (users)

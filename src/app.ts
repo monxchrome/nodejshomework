@@ -5,10 +5,11 @@ import mongoose from "mongoose";
 config();
 
 import { configs } from "./config";
+import { cronRunner } from "./cron";
 import { authRouter } from "./router";
 import { userRouter } from "./router";
+import { carRouter } from "./router/car.router";
 import { IError } from "./types";
-import {cronRunner} from "./cron";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", userRouter);
+app.use("/cars", carRouter);
 app.use("/auth", authRouter);
 
 app.use((err: IError, req: Request, res: Response, next: NextFunction) => {
