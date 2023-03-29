@@ -3,6 +3,7 @@ import { Types } from "mongoose";
 import { ApiError } from "../errors";
 import { Car } from "../models";
 import { ICar, IPaginationResponse, IQuery } from "../types";
+import {carRepository} from "../repository";
 
 class CarService {
   public async getAll(): Promise<ICar[]> {
@@ -15,32 +16,7 @@ class CarService {
 
   public async getById(carID: string, userID: string): Promise<ICar> {
     try {
-      const result = await Car.aggregate([
-        {
-          $match: {
-            // serarch for userID and carID
-            _id: carID,
-            user: new Types.ObjectId(userID),
-          },
-        },
-        {
-          $lookup: {
-            from: "users", // model in db "users" (users model)
-            localField: "user", // field in db "user".ref. (cars model)
-            foreignField: "_id", // id of user
-            as: "user", // name how in localField
-          },
-        },
-        {
-          $unwind: {
-            // structure array of user is off
-            path: "$user",
-            preserveNullAndEmptyArrays: true,
-          },
-        },
-      ]);
-
-      return result[0];
+      return await carRepository.getByUserAndCar(carID, userID);
     } catch (e) {
       throw new ApiError(e.message, e.status);
     }

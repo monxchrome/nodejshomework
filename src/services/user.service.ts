@@ -3,17 +3,9 @@ import { User } from "../models";
 import { IPaginationResponse, IQuery, IUser } from "../types";
 
 class UserService {
-  public async getAll(): Promise<IUser[]> {
-    try {
-      return User.find();
-    } catch (e) {
-      throw new ApiError(e.message, e.status);
-    }
-  }
-
   public async getById(id: string): Promise<IUser> {
     try {
-      return User.findById(id);
+      return User.findById(id).lean();
     } catch (e) {
       throw new ApiError(e.message, e.status);
     }
@@ -81,17 +73,17 @@ class UserService {
     }
   }
 
-  public async update(id: string, body: object) {
+  public async update(userID: string, data: Partial<IUser>): Promise<void> {
     try {
-      return User.findByIdAndUpdate({ _id: id }, { ...body }, { new: true });
+      return User.findByIdAndUpdate(userID, data, { new: true });
     } catch (e) {
       throw new ApiError(e.message, e.status);
     }
   }
 
-  public async delete(id: string) {
+  public async delete(userID: string): Promise<void> {
     try {
-      return User.deleteOne({ _id: id });
+      await User.deleteOne({ _id: userID });
     } catch (e) {
       throw new ApiError(e.message, e.status);
     }

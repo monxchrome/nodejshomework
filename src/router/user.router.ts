@@ -9,8 +9,6 @@ export const userRouter = router;
 
 router.get("/", userController.getAll);
 
-router.post("/", userMW.isValidCreate, userController.create);
-
 router.get(
   "/:userID",
   authMiddleware.checkAccessToken,

@@ -34,33 +34,15 @@ class UserController {
     }
   }
 
-  public async create(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<Response<ICommonRes<IUser>>> {
-    try {
-      const body = req.body;
-      await userService.create(body);
-
-      return res.status(200).json({
-        message: "User created",
-      });
-    } catch (e) {
-      next(e);
-    }
-  }
-
   public async update(
     req: Request,
     res: Response,
     next: NextFunction
   ): Promise<Response<ICommonRes<IUser>>> {
     try {
-      const { userID } = req.params;
-      const user = req.body;
+      const { params, body } = req;
 
-      await userService.update(userID, user);
+      await userService.update(params.userID, body);
 
       return res.json({
         message: "User updated",
