@@ -1,11 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 
-import { EToken } from "../enums";
-import { EActionToken } from "../enums/action-token.enum";
+import { EActionToken, EToken } from "../enums";
 import { ApiError } from "../errors";
-import { Action } from "../models/Action.model";
-import { oldPassword } from "../models/Old.password.model";
-import { Token } from "../models/Token.model";
+import { Action, oldPassword, Token } from "../models";
 import { passwordService, tokenService } from "../services";
 import { UserValidator } from "../validators";
 

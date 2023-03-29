@@ -1,4 +1,4 @@
-import { ESmsEnum } from "../../enums/sms.enum";
+import { ESmsEnum } from "../../enums";
 
 export const smsTemplates: { [key: string]: string } = {
   [ESmsEnum.REGISTER]: "Welcome to our site",

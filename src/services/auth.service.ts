@@ -1,14 +1,7 @@
-import { EActionToken } from "../enums/action-token.enum";
-import { EEmailEnum } from "../enums/email.enum";
-import { ESmsEnum } from "../enums/sms.enum";
-import { EUserStatus } from "../enums/user-status.enum";
+import { EActionToken, EEmailEnum, ESmsEnum, EUserStatus } from "../enums";
 import { ApiError } from "../errors";
-import { User } from "../models";
-import { Action } from "../models/Action.model";
-import { oldPassword } from "../models/Old.password.model";
-import { Token } from "../models/Token.model";
-import { ITokenPair, ITokenPayload, IUser } from "../types";
-import { ICredentials } from "../types/auth.types";
+import { Action, oldPassword, Token, User } from "../models";
+import { ICredentials, ITokenPair, ITokenPayload, IUser } from "../types";
 import { emailService } from "./email.service";
 import { passwordService } from "./oauth.service";
 import { smsService } from "./sms.service";

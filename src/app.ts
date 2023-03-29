@@ -2,14 +2,12 @@ import { config } from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 
-config();
-
 import { configs } from "./config";
 import { cronRunner } from "./cron";
-import { authRouter } from "./router";
-import { userRouter } from "./router";
-import { carRouter } from "./router/car.router";
+import { authRouter, carRouter, userRouter } from "./router";
 import { IError } from "./types";
+
+config();
 
 const app = express();
 
@@ -32,5 +30,6 @@ app.use((err: IError, req: Request, res: Response, next: NextFunction) => {
 app.listen(configs.PORT, async () => {
   await mongoose.connect(configs.DB_URL);
   cronRunner();
+  // eslint-disable-next-line no-console
   console.log(`Server has started on port: ${configs.PORT}`);
 });

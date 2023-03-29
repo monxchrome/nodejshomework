@@ -2,7 +2,7 @@ import { CronJob } from "cron";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
-import { Token } from "../models/Token.model";
+import { Token } from "../models";
 
 dayjs.extend(utc);
 

@@ -1,6 +1,6 @@
 import { model, Schema, Types } from "mongoose";
 
-import {ICar, ICarModel} from "../types/car.types";
+import { ICar, ICarModel } from "../types";
 import { User } from "./User.model";
 
 export const carSchema = new Schema(

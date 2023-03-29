@@ -1,9 +1,8 @@
 import { Types } from "mongoose";
 
 import { ApiError } from "../errors";
-import { Car } from "../models/Car.model";
-import { ICar } from "../types/car.types";
-import { IPaginationResponse, IQuery } from "../types/pagination.types";
+import { Car } from "../models";
+import { ICar, IPaginationResponse, IQuery } from "../types";
 
 class CarService {
   public async getAll(): Promise<ICar[]> {
@@ -54,12 +53,15 @@ class CarService {
       // tests methods, statics
 
       const testStatic = await Car.findByBrand("Stefan");
+      // eslint-disable-next-line no-console
       console.log(testStatic);
 
       const testMethod = await Car.findById("640534e2638dd9cb6664ea88");
+      // eslint-disable-next-line no-console
       console.log(testMethod.brandWithYear());
 
       const testVirtual = await Car.findById("640f5aa45ec89b0f0631273d");
+      // eslint-disable-next-line no-console
       console.log(testVirtual.brandWithModel);
 
       // regular

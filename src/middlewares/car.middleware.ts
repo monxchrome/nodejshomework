@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { isObjectIdOrHexString } from "mongoose";
 
 import { ApiError } from "../errors";
-import { Car } from "../models/Car.model";
-import { CarValidator } from "../validators/car.validator";
+import { Car } from "../models";
+import { CarValidator } from "../validators";
 
 class CarMiddleware {
   public async getByIdOrThrow(

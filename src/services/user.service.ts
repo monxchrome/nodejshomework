@@ -1,7 +1,6 @@
 import { ApiError } from "../errors";
 import { User } from "../models";
-import { IUser } from "../types";
-import { IPaginationResponse, IQuery } from "../types/pagination.types";
+import { IPaginationResponse, IQuery, IUser } from "../types";
 
 class UserService {
   public async getAll(): Promise<IUser[]> {
@@ -27,12 +26,15 @@ class UserService {
       // tests methods, statics
 
       const testStatic = await User.findByName("Stefan");
+      // eslint-disable-next-line no-console
       console.log(testStatic);
 
       const testMethod = await User.findById("640534e2638dd9cb6664ea88");
+      // eslint-disable-next-line no-console
       console.log(testMethod.nameWithAge());
 
       const testVirtual = await User.findById("640f5aa45ec89b0f0631273d");
+      // eslint-disable-next-line no-console
       console.log(testVirtual.nameWithSurname);
 
       // regular
