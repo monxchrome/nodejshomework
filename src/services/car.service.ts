@@ -2,8 +2,8 @@ import { Types } from "mongoose";
 
 import { ApiError } from "../errors";
 import { Car } from "../models";
+import { carRepository } from "../repository";
 import { ICar, IPaginationResponse, IQuery } from "../types";
-import {carRepository} from "../repository";
 
 class CarService {
   public async getAll(): Promise<ICar[]> {
