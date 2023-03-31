@@ -42,3 +42,11 @@ router.put(
   fileMiddleware.isAvatarValid,
   userController.uploadAvatar
 );
+
+router.delete(
+  "/:userID/avatar",
+  authMiddleware.checkAccessToken,
+  userMW.isIDValid,
+  userMW.getByIdOrThrow,
+  userController.deleteAvatar
+);

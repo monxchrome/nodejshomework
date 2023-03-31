@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { UploadedFile } from "express-fileupload";
 
+import { userMapper } from "../mapper/user.mapper";
 import { userService } from "../services";
 import { ICommonRes, IQuery, IUser } from "../types";
 
@@ -29,7 +30,9 @@ class UserController {
     try {
       const { user } = res.locals;
 
-      return res.json(user);
+      const response = userMapper.toResponse(user);
+
+      return res.json(response);
     } catch (e) {
       next(e);
     }
@@ -43,10 +46,13 @@ class UserController {
     try {
       const { params, body } = req;
 
-      await userService.update(params.userID, body);
+      const updatedUser = await userService.update(params.userID, body);
+
+      const response = userMapper.toResponse(updatedUser);
 
       return res.json({
         message: "User updated",
+        data: response,
       });
     } catch (e) {
       next(e);
@@ -77,14 +83,37 @@ class UserController {
     next: NextFunction
   ): Promise<Response<void>> {
     try {
-      const { userID } = req.params;
+      const { user: userEntity } = res.locals;
       const avatar = req.files.avatar as UploadedFile;
 
-      const avatars = await userService.uploadAvatar(avatar, userID);
+      const user = await userService.uploadAvatar(avatar, userEntity);
+
+      const response = userMapper.toResponse(user);
 
       return res.status(201).json({
         message: "Avatar is uploaded",
-        data: avatars,
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  public async deleteAvatar(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response<IUser>> {
+    try {
+      const userEntity = res.locals.user as IUser;
+
+      const user = await userService.deleteAvatar(userEntity);
+
+      const response = userMapper.toResponse(user);
+
+      return res.status(201).json({
+        message: "User avatar has been deleted",
+        data: response,
       });
     } catch (e) {
       next(e);
