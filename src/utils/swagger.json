@@ -1,0 +1,493 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v4.4 beta",
+    "title": "2023 nodejs",
+    "description": "nodejs module student 2023",
+    "contact": {
+      "name": "Stefan Samokhval",
+      "email": "samokhvalstefan@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Get all users",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "Get all users with pagination"
+          },
+          "404": {
+            "description": "Page not found"
+          }
+        }
+      }
+    },
+    "/users/{userID}": {
+      "get": {
+        "summary": "Get user by id",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "Get user by ID"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "403": {
+            "description": "Your access token is expired"
+          },
+          "401": {
+            "description": "Access token is not valid"
+          },
+          "422": {
+            "description": "UserID is not valid"
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update user by id",
+        "responses": {
+          "200": {
+            "description": "Update user by ID"
+          },
+          "400": {
+            "description": "Validate error"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "403": {
+            "description": "Your access token is expired"
+          },
+          "401": {
+            "description": "Access token is not valid"
+          },
+          "422": {
+            "description": "UserID is not valid"
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete user by id",
+        "responses": {
+          "200": {
+            "description": "Delete user by ID"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "403": {
+            "description": "Your access token is expired"
+          },
+          "401": {
+            "description": "Access token is not valid"
+          },
+          "422": {
+            "description": "UserID is not valid"
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ]
+      }
+    },
+
+    "/users/{userID}/avatar": {
+      "put": {
+        "tags": ["Users avatars"],
+        "summary": "Update user avatar by id",
+        "responses": {
+          "200": {
+            "description": "Update user avatar by ID"
+          },
+          "400": {
+            "description": "Validate avatar error"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "403": {
+            "description": "Your access token is expired"
+          },
+          "401": {
+            "description": "Access token is not valid"
+          },
+          "422": {
+            "description": "UserID is not valid"
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Users avatars"],
+        "summary": "Delete user avatar by id",
+        "responses": {
+          "200": {
+            "description": "Delete user by ID"
+          },
+          "404": {
+            "description": "Avatar not found"
+          },
+          "403": {
+            "description": "Your access token is expired"
+          },
+          "401": {
+            "description": "Access token is not valid"
+          },
+          "422": {
+            "description": "UserID is not valid"
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ]
+      }
+    },
+
+    "/cars": {
+      "get": {
+        "tags": ["Cars"],
+        "summary": "Get all cars",
+        "responses": {
+          "200": {
+            "description": "Get all cars"
+          },
+          "404": {
+            "description": "Page not found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Create car",
+        "responses": {
+          "200": {
+            "description": "Post car"
+          },
+          "403": {
+            "description": "Your access token is expired"
+          },
+          "401": {
+            "description": "Access token is not valid"
+          },
+          "400": {
+            "description": "Validate error"
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ]
+      }
+    },
+    "/cars/{carID}": {
+      "get": {
+        "tags": ["Cars"],
+        "summary": "Get car by id",
+        "responses": {
+          "200": {
+            "description": "Get car by ID"
+          },
+          "403": {
+            "description": "Your access token is expired"
+          },
+          "401": {
+            "description": "Access token is not valid"
+          },
+          "422": {
+            "description": "CarID is not valid"
+          },
+          "404": {
+            "description": "Car not found"
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Cars"],
+        "summary": "Update car by id",
+        "responses": {
+          "200": {
+            "description": "Update car by ID"
+          },
+          "403": {
+            "description": "Your access token is expired"
+          },
+          "401": {
+            "description": "Access token is not valid"
+          },
+          "422": {
+            "description": "CarID is not valid"
+          },
+          "404": {
+            "description": "Car not found"
+          },
+          "400": {
+            "description": "Validate error"
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Cars"],
+        "summary": "Delete car by id",
+        "responses": {
+          "200": {
+            "description": "Delete car by ID"
+          },
+          "403": {
+            "description": "Your access token is expired"
+          },
+          "401": {
+            "description": "Access token is not valid"
+          },
+          "422": {
+            "description": "CarID is not valid"
+          },
+          "404": {
+            "description": "Car not found"
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ]
+      }
+    },
+
+    "/register": {
+      "post": {
+        "tags": ["Register"],
+        "summary": "Register user",
+        "responses": {
+          "200": {
+            "description": "Register User"
+          },
+          "400": {
+            "description": "Validate error"
+          }
+        }
+      }
+    },
+
+    "/login": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Login user",
+        "responses": {
+          "200": {
+            "description": "Authorize User"
+          },
+          "400": {
+            "description": "Validate error"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+
+    "/refresh": {
+      "post": {
+        "tags": ["Refresh"],
+        "summary": "Create refresh token",
+        "responses": {
+          "200": {
+            "description": "Refresh token OK!"
+          },
+          "404": {
+            "description": "Your refresh token has expired"
+          },
+          "401": {
+            "description": "Refresh token is not valid"
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ]
+      }
+    },
+
+    "/password/change": {
+      "post": {
+        "tags": ["Passwords"],
+        "summary": "Change password",
+        "responses": {
+          "200": {
+            "description": "Change user password"
+          },
+          "403": {
+            "description": "Access token has expired"
+          },
+          "401": {
+            "description": "Access token is not valid"
+          },
+          "400": {
+            "description": "Validate error"
+          }
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ]
+      }
+    },
+    "/password/forgot": {
+      "post": {
+        "tags": ["Passwords"],
+        "summary": "Forgot password email sender",
+        "responses": {
+          "200": {
+            "description": "Send forgot password to email"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/password/forgot/:token": {
+      "put": {
+        "tags": ["Passwords"],
+        "summary": "Forgot password",
+        "responses": {
+          "200": {
+            "description": "Email forgot token"
+          },
+          "403": {
+            "description": "Action token is not found"
+          },
+          "401": {
+            "description": "Action token not valid"
+          },
+          "409": {
+            "description": "Your new password is same as old"
+          },
+          "400": {
+            "description": "Validate error"
+          }
+        }
+      }
+    },
+
+    "/activate": {
+      "post": {
+        "tags": ["Activates"],
+        "summary": "Activate email sender",
+        "responses": {
+          "200": {
+            "description": "Send activate token to email"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/activate/:token": {
+      "put": {
+        "tags": ["Activates"],
+        "summary": "Activate email",
+        "responses": {
+          "200": {
+            "description": "Account has been activated"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    }
+  }
+}

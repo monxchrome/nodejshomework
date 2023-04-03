@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script
+            src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+            integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+            crossorigin="anonymous">
+    </script>
+</head>
+<body>
+
+<div></div>
+
+<label>
+    <input placeholder="message"/>
+</label>
+<button>send message</button>
+
+<button class="join">join room</button>
+<button class="join">leave room</button>
+
+<script>
+
+    const socket = io('http://localhost:5100', {
+        auth: {
+            token: "asdqweasdasdf"
+        }
+    })
+
+    // socket.on('message', (data) => {
+    //     console.log(data)
+    // })
+    //
+    // socket.on('user:connected', (data) => {
+    //     document.write(data.message)
+    // })
+
+    socket.on('message:get', (text) => {
+        const div = document.createElement('div');
+        div.innerText = text;
+        document.querySelector('div').appendChild(div)
+    })
+
+    document.querySelector('button').onclick = () => {
+        const text = document.querySelector('input').value;
+        socket.emit('message:send', text)
+    }
+
+    const join = document.querySelector('.join');
+    join.onclick = () => {
+        socket.emit('join:room', {roomID: 1})
+    }
+
+    socket.on('user:joined', (data) => {
+        document.write(JSON.stringify(data))
+    })
+
+    const leave = document.querySelector('.join');
+    leave.onclick = () => {
+        socket.emit('leave:room', {roomID: 1 })
+    }
+
+</script>
+
+</body>
+</html>
