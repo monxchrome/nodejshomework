@@ -20,17 +20,17 @@ class UserService {
     try {
       // tests methods, statics
 
-      const testStatic = await User.findByName("Stefan");
-      // eslint-disable-next-line no-console
-      console.log(testStatic);
-
-      const testMethod = await User.findById("640534e2638dd9cb6664ea88");
-      // eslint-disable-next-line no-console
-      console.log(testMethod.nameWithAge());
-
-      const testVirtual = await User.findById("640f5aa45ec89b0f0631273d");
-      // eslint-disable-next-line no-console
-      console.log(testVirtual.nameWithSurname);
+      // const testStatic = await User.findByName("Stefan");
+      // // eslint-disable-next-line no-console
+      // console.log(testStatic);
+      //
+      // const testMethod = await User.findById("640534e2638dd9cb6664ea88");
+      // // eslint-disable-next-line no-console
+      // console.log(testMethod.nameWithAge());
+      //
+      // const testVirtual = await User.findById("640f5aa45ec89b0f0631273d");
+      // // eslint-disable-next-line no-console
+      // console.log(testVirtual.nameWithSurname);
 
       // regular
 
